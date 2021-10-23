@@ -4,6 +4,7 @@ import { ControlBaseModel } from '../controls/control.base.model';
 export abstract class FormBaseViewModel<T>{
 
     public abstract model: T;
+
     public controls: ControlBaseModel[] = [];
     /** все контролы формы с именем контрола в качестве ключа */
     private _controlsMap: { [name: string]: ControlBaseModel } = {};
@@ -30,7 +31,7 @@ export abstract class FormBaseViewModel<T>{
 
 
     protected initialize(): void{
-        
+
     }
 
     /**
@@ -60,6 +61,6 @@ export abstract class FormBaseViewModel<T>{
         this._form = new FormGroup(formGroup);
     }
 
-    
+
 
 }
