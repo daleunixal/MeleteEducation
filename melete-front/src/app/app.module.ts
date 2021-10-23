@@ -11,13 +11,14 @@ import { AsideLayerComponent } from './page-layout/children/aside/aside.componen
 import { HeaderLayerComponent } from './page-layout/children/header/header.component';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,
     PageLayerComponent,
     AsideLayerComponent,
     HeaderLayerComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +28,11 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
       TuiDialogModule,
       TuiNotificationsModule
 ],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
+  providers: [
+    {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
+    // {provide: MELETE_ENDPOINTS, useClass: }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
