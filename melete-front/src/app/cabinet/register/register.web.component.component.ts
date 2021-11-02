@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterViewModel } from './models/view-model/register.view-model';
 
 @Component({
   selector: 'medu-register.web.component',
@@ -8,12 +7,12 @@ import { RegisterViewModel } from './models/view-model/register.view-model';
 })
 export class RegisterWebComponentComponent implements OnInit {
 
-    public model!: RegisterViewModel;
+    // public model!: RegisterViewModel;
 
   constructor() { }
 
   public ngOnInit(): void {
-      this.model = new RegisterViewModel();
+      // this.model = new RegisterViewModel();
   }
 
 }

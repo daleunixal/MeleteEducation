@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
     selector: "medu-dashboard",
-    templateUrl: "dashboard.component.html"
+    templateUrl: "dashboard.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit{
-    ngOnInit(): void {
+    public ngOnInit(): void {
         // throw new Error("Method not implemented.");
     }
 

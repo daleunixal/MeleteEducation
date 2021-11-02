@@ -3,25 +3,37 @@
 .aside-box {
     top: 4rem;
     min-height: 92vh;
-
+    grid-column: 1;
 }
 .aside-border{
+
     border-right: 1px solid var(--tui-base-03);
+}
+
+.layout-page-container{
+    display: grid;
+    grid-template-columns: 13% 87%;
 }
 
 .header-box{
     border-color: #0a0a0a;
     border-bottom: 1px solid var(--tui-base-03);
     .shadow(2);
-    
-    &.tui-row{
-        height: 8vh;
-        align-items: center;
+    padding-left: 0;
+    width: 100vw;
+    height: 8vh;
+    align-items: center;
+    display: grid;
+}
+
+.tui-container{
+
+    &_fullwidthq {
+        width: auto;
     }
 }
 
 .content-box{
-    padding-top: 5vh;;
-    padding-left: 5vw;
+    grid-column: 2;
 }
 
