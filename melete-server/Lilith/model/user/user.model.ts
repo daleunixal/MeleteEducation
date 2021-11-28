@@ -1,7 +1,8 @@
 import { MongoInteractive } from '../mongo-interactive/mongo-interactive.base';
-import { AnyParamConstructor } from '@typegoose/typegoose/lib/types';
+import { AnyParamConstructor, DocumentType } from '@typegoose/typegoose/lib/types';
 import { getModelForClass, prop, ReturnModelType } from '@typegoose/typegoose';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
+import { fromPromise } from 'rxjs/dist/types/internal/observable/innerFrom';
 
 export class UserModel extends MongoInteractive<UserModel>{
     @prop()
@@ -10,6 +11,8 @@ export class UserModel extends MongoInteractive<UserModel>{
     public readonly password: string;
     @prop()
     public readonly username: string;
+    @prop()
+    public readonly email: string;
 
 
     constructor(admin: boolean, password: string, username: string) {
@@ -29,6 +32,16 @@ export class UserModel extends MongoInteractive<UserModel>{
     }
 
     public saveModel(): Observable<boolean> {
-        return undefined;
+        return fromPromise(this.dataModel.find({email: this.email}).exec()).pipe(
+            switchMap((response) => {
+                if(response.length === 1){
+                    return response[0] as DocumentType<UserModel>
+                }
+            })
+        );
+    }
+
+    protected fillModel(data: DocumentType<UserModel>){
+        // data.
     }
 }

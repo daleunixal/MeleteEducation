@@ -51,5 +51,7 @@ export abstract class MongoInteractive<T> {
             (Math.random() * 16 | 0).toString(16)
         ).toLowerCase();
     };
+
+    protected abstract fillModel(data: any): void;
 }
 
