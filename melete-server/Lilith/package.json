@@ -4,12 +4,15 @@
   "description": "Express based server for MeleteEdu",
   "main": "index.js",
   "scripts": {
+    "serve": "ts-node app/server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nikita Zernyukov (daleunixal)",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dayjs": "^1.10.7",
     "express": "^4.17.1",
     "hash-it": "^5.0.2",

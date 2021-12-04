@@ -31,6 +31,9 @@ export class UserModel extends MongoInteractive<UserModel>{
         // this.dataModel = getModelForClass(UserModel);
     }
 
+    /**
+     * Сохранение модели в DB
+     */
     public saveModel(): Observable<boolean> {
         return fromPromise(this.dataModel.find({email: this.email}).exec()).pipe(
             switchMap((response) => {
@@ -41,7 +44,13 @@ export class UserModel extends MongoInteractive<UserModel>{
         );
     }
 
+    /**
+     * Заполнение модели для отправки на DBM
+     * @param data
+     * @protected
+     */
     protected fillModel(data: DocumentType<UserModel>){
-        // data.
+        // data.password = this.password;
+
     }
 }
