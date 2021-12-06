@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import bodyParser from 'body-parser';
+import { UserRoutes } from './routes/user.routes';
 import { MongoDbConnector } from './mongo-connector/mongo-db.connector';
 
 const app = express();
@@ -27,4 +28,11 @@ app.listen(port, ()=>{
 
 app.get('/', (request, response) => {
     response.send('MeletEducation: Lilith server ident')
+})
+
+app.use(UserRoutes)
+
+
+app.get('/api/v1/login', (request, response) => {
+
 })

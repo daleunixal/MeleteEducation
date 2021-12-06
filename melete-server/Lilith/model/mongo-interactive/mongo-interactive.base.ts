@@ -21,11 +21,13 @@ export abstract class MongoInteractive<T> {
     /**
      * Сохраняем модель Mongoose в MongoDB
      *
+     * @param throwOnExist - Проверять на существоание?
+     *
      * @returns Observable<boolean>
      *     Если true - сохранение успешно
      *     Если false - запись идентична прошлой версии
      */
-    public abstract saveModel(): Observable<boolean>;
+    public abstract saveModel(throwOnExist: boolean): Observable<boolean>;
 
     /**
      * Получить хэш объекта
