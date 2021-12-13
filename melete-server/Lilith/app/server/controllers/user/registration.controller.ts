@@ -10,6 +10,7 @@ export function registerUser(request: Request<UserModel, any, IUser>, response: 
         return;
     }
     const user: UserModel = new UserModel(request.body);
+
     user.saveModel(true).subscribe(
         {
             next: (value) => {
@@ -26,3 +27,4 @@ export function registerUser(request: Request<UserModel, any, IUser>, response: 
             }
         })
 }
+

@@ -3,22 +3,9 @@ import { Observable } from 'rxjs';
 import dayjs from 'dayjs';
 import hash from 'hash-it';
 import * as mongoose from 'mongoose';
+import { ObjectId } from 'mongodb';
 
 export abstract class MongoInteractive<T> {
-    // @ts-ignore
-    public static readonly dataModel: ReturnModelType<T> = getModelForClass(this)
-
-    constructor(cls: any) {
-        // @ts-ignore
-        this.dataModel = getModelForClass(cls)
-    }
-
-    /**
-     * Возвращает модель Mongoose <T>
-     */
-    // @ts-ignore
-    public static abstract getModel(): ReturnModelType<T>;
-
     /**
      * Сохраняем модель Mongoose в MongoDB
      *
@@ -47,10 +34,10 @@ export abstract class MongoInteractive<T> {
      * @private
      * @returns string _ID
      */
-    protected static generateObjectID(): mongoose.Types.ObjectId {
+    protected static generateObjectID(): ObjectId {
         const timestamp = (dayjs().unix()).toString(16);
 
-        return new mongoose.Types.ObjectId(timestamp + 'x'.repeat(16).replace(/[x]/g, () =>
+        return new ObjectId(timestamp + 'x'.repeat(16).replace(/[x]/g, () =>
             (Math.random() * 16 | 0).toString(16)
         ).toLowerCase());
     };

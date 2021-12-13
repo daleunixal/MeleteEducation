@@ -1,12 +1,15 @@
 import { MongoInteractive } from '../mongo-interactive/mongo-interactive.base';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
-import { mongoose, prop, ReturnModelType } from '@typegoose/typegoose';
+import { getModelForClass, mongoose, prop, ReturnModelType } from '@typegoose/typegoose';
 import { from, map, Observable } from 'rxjs';
 import { IUser } from './user.interface';
 import * as jwt from 'jsonwebtoken'
 import { secretJWT } from '../../configuration';
 import dayjs from 'dayjs';
 import { UserPayload } from './user.payload';
+import * as bcrypt from 'bcrypt';
+import { HydratedDocument } from 'mongoose';
+import { ObjectId } from 'mongodb';
 
 export class UserModel extends MongoInteractive<UserModel> implements IUser {
     @prop()
@@ -18,32 +21,26 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
     @prop()
     public email: string;
     @prop()
-    public readonly _id: mongoose.Types.ObjectId
-
+    public readonly _id: ObjectId
 
     constructor(data: IUser) {
-        super(UserModel);
-        this.password = data.password;
+        super();
+        this.password = bcrypt.hashSync(data.password, 10);
         this.username = data.username;
         this.email = data.email
         this._id = data.id?? MongoInteractive.generateObjectID();
     }
 
-    // @ts-ignore
-    public static getModel(): ReturnModelType<UserModel> {
-        if(this.dataModel){
-            return this.dataModel
-        }
-
-        // this.dataModel = getModelForClass(UserModel);
+    public static getModel(): ReturnModelType<typeof UserModel> {
+        return getModelForClass(UserModel)
     }
 
     /**
      * Сохранение модели в DB
      */
     public saveModel(throwOnExist: boolean = false): Observable<boolean> {
-        return from(UserModel.dataModel.find({username: this.username}).exec()).pipe(
-            map((response): boolean => {
+        return from(UserModel.getModel().find({username: this.username}).exec()).pipe(
+            map((response: HydratedDocument<DocumentType<UserModel>>[]): boolean => {
                 if(response.length === 1){
                     if (throwOnExist){
                         throw new Error("User already exist")
@@ -55,10 +52,11 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
 
                     return true;
                 }
-                UserModel.dataModel.create({
+                UserModel.getModel().create({
                     password: this.password,
                     username: this.username,
-                    email: this.email
+                    email: this.email,
+                    _id: UserModel.generateObjectID()
                 })
 
                 return true;
