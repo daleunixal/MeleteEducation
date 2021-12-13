@@ -2,10 +2,11 @@ import { getModelForClass, ReturnModelType } from '@typegoose/typegoose';
 import { Observable } from 'rxjs';
 import dayjs from 'dayjs';
 import hash from 'hash-it';
+import * as mongoose from 'mongoose';
 
 export abstract class MongoInteractive<T> {
     // @ts-ignore
-    public readonly dataModel: ReturnModelType<T>
+    public static readonly dataModel: ReturnModelType<T> = getModelForClass(this)
 
     constructor(cls: any) {
         // @ts-ignore
@@ -16,7 +17,7 @@ export abstract class MongoInteractive<T> {
      * Возвращает модель Mongoose <T>
      */
     // @ts-ignore
-    public abstract getModel(): ReturnModelType<T>;
+    public static abstract getModel(): ReturnModelType<T>;
 
     /**
      * Сохраняем модель Mongoose в MongoDB
@@ -46,12 +47,12 @@ export abstract class MongoInteractive<T> {
      * @private
      * @returns string _ID
      */
-    private static generateObjectID(): string {
+    protected static generateObjectID(): mongoose.Types.ObjectId {
         const timestamp = (dayjs().unix()).toString(16);
 
-        return timestamp + 'x'.repeat(16).replace(/[x]/g, () =>
+        return new mongoose.Types.ObjectId(timestamp + 'x'.repeat(16).replace(/[x]/g, () =>
             (Math.random() * 16 | 0).toString(16)
-        ).toLowerCase();
+        ).toLowerCase());
     };
 
     protected abstract fillModel(data: any): void;
