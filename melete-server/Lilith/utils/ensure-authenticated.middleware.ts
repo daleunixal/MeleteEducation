@@ -6,11 +6,14 @@ import { UserPayload } from '../model/user/user.payload';
 import { UserModel } from '../model/user/user.model';
 import { from, tap } from 'rxjs';
 import { mongoose } from '@typegoose/typegoose';
+import { HydratedDocument } from 'mongoose';
+import { DocumentType } from '@typegoose/typegoose/lib/types';
 
 export function ensureAuthenticatedMiddleware(request: Request, response: Response, next: Function){
     if(!request.headers.authorization){
         response.status(401).send({
-            error: "JWT Token missing"
+            error: "JWT Token missing",
+            isValid: false
         })
     }
 
@@ -20,28 +23,36 @@ export function ensureAuthenticatedMiddleware(request: Request, response: Respon
 
     if(!payload){
         response.status(401).send({
-            error: "JWT Token Invalid"
+            error: "JWT Token Invalid",
+            isValid: false
         })
+
+        return;
     }
 
     if(dayjs(payload.expire).isBefore(dayjs())){
         response.status(401).send({
-            error: "JWT Token Expired"
+            error: "JWT Token Expired",
+            isValid: false
         })
+
+        return
     }
 
-    from(UserModel.dataModel.findById(payload.payload.id).exec())
+    from(UserModel.getModel().findById(payload.payload.id).exec())
         .pipe(
             tap((value) => {
                 if(!value){
                     response.status(401).send({
-                        error: "JWT Token Invalid"
+                        error: "JWT Token Invalid",
+                        isValid: false
                     })
 
                     return
                 }
 
                 (request as ensuredRequest).user = payload.payload
+                next()
             })
         )
 }

@@ -1,6 +1,13 @@
-import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { TuiRootModule, TuiDialogModule, TuiNotificationsModule, TUI_SANITIZER, TuiButtonModule, TuiScrollbarModule } from '@taiga-ui/core';
+import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+    TuiRootModule,
+    TuiDialogModule,
+    TuiNotificationsModule,
+    TUI_SANITIZER,
+    TuiButtonModule,
+    TuiScrollbarModule
+} from '@taiga-ui/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,18 +16,20 @@ import { AppComponent } from './app.component';
 import { PageLayerComponent } from './page-layout/page.component';
 import { AsideLayerComponent } from './page-layout/children/aside/aside.component';
 import { HeaderLayerComponent } from './page-layout/children/header/header.component';
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { TuiActionModule } from '@taiga-ui/kit';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProfileManagerService } from './services/profile-manager.service';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageLayerComponent,
-    AsideLayerComponent,
-    HeaderLayerComponent,
-    DashboardComponent,
-  ],
+    declarations: [
+        AppComponent,
+        PageLayerComponent,
+        AsideLayerComponent,
+        HeaderLayerComponent,
+        DashboardComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -30,13 +39,16 @@ import { TuiActionModule } from '@taiga-ui/kit';
         TuiNotificationsModule,
         TuiButtonModule,
         TuiScrollbarModule,
-        TuiActionModule
+        TuiActionModule,
+        HttpClientModule
     ],
-  providers: [
-    {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
-    // {provide: MELETE_ENDPOINTS, useClass: }
+    providers: [
+        {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
+        HttpClient,
+        // {provide: MELETE_ENDPOINTS, useClass: }
 
-  ],
-  bootstrap: [AppComponent]
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

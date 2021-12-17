@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
-import { RegisterWebComponentComponent } from './register/register.web.component.component';
+import { RegisterWebComponent } from './register/register-web.component';
+import { LoginWebComponent } from './login/login.web.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'register'},
-    { path: 'register', component: RegisterWebComponentComponent }
+    {path: '', redirectTo: 'register'},
+    {path: 'register', component: RegisterWebComponent},
+    {path: 'login', component: LoginWebComponent}
 ];
 
 @NgModule({

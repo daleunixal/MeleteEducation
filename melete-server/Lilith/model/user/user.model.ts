@@ -22,6 +22,8 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
     public email: string;
     @prop()
     public readonly _id: ObjectId
+    @prop()
+    public fullname: string;
 
     constructor(data: IUser) {
         super();
@@ -29,6 +31,7 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
         this.username = data.username;
         this.email = data.email
         this._id = data.id?? MongoInteractive.generateObjectID();
+        this.fullname = data.fullname;
     }
 
     public static getModel(): ReturnModelType<typeof UserModel> {
@@ -46,8 +49,9 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
                         throw new Error("User already exist")
                     }
                     const model = response[0] as DocumentType<UserModel>
-                    model.password = this.password
-                    model.email = this.email
+                    model.password = this.password;
+                    model.email = this.email;
+                    model.fullname = this.fullname;
                     model.save();
 
                     return true;
@@ -55,6 +59,7 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
                 UserModel.getModel().create({
                     password: this.password,
                     username: this.username,
+                    fullname: this.fullname,
                     email: this.email,
                     _id: UserModel.generateObjectID()
                 })

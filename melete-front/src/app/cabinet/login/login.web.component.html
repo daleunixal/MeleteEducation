@@ -1,0 +1,22 @@
+<tui-island size="l" [hoverable]="false" [textAlign]="'center'">
+    <form [formGroup]="model.form" class="" (keydown.enter)="onSubmit()">
+        <h3 class="tui-form__header tui-form__header_margin-top_none">Вход в систему</h3>
+        <div class="tui-form__row">
+            <tui-input class="tui-form__multi-field"
+                       formControlName="login"
+                       tuiHintContent="Username">Логин
+            </tui-input>
+        </div>
+        <div class="tui-form__row">
+            <tui-input-password class="tui-form__multi-field"
+                                formControlName="password"
+                                tuiHintContent="Password">Пароль
+            </tui-input-password>
+        </div>
+        <div class="tui-form__buttons tui-form__buttons_align_end">
+            <button class="tui-form__button" tuiButton (click)="onSubmit()">
+                Войти
+            </button>
+        </div>
+    </form>
+</tui-island>

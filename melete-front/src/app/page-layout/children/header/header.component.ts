@@ -15,6 +15,6 @@ export class HeaderLayerComponent{
     }
 
     public redirectLogin(): void{
-        this._router.navigateByUrl('/login')
+        this._router.navigateByUrl('/cabinet/login')
     }
 }

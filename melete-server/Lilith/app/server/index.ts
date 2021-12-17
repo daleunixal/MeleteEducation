@@ -11,7 +11,7 @@ const options: cors.CorsOptions = {
     origin: 'http://localhost:4200'
 }
 
-app.use(cors(options))
+// app.use(cors(options))
 app.use(bodyParser.json())
 
 const mongoClient = new MongoDbConnector();

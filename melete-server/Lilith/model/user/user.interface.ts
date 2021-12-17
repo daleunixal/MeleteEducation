@@ -5,4 +5,5 @@ export interface IUser {
     password: string
     username: string,
     id?: mongoose.Types.ObjectId
+    fullname?: string
 }
