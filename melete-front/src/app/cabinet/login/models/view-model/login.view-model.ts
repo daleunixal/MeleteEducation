@@ -23,6 +23,10 @@ export class LoginViewModel {
         } as IProfileLoginRequest
     }
 
+    public setUsername(username: string): void{
+        this.form.get('login')?.setValue(username);
+    }
+
     private initializeForm(): void{
         this.form = this._fb.group({
             login: ['', [Validators.required]],

@@ -1,5 +1,6 @@
 export interface IProfileRegisterRequest{
     username: string,
     password: string,
-    email: string
+    email: string,
+    fullname: string
 }

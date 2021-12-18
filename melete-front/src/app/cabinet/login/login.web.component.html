@@ -1,5 +1,5 @@
 <tui-island size="l" [hoverable]="false" [textAlign]="'center'">
-    <form [formGroup]="model.form" class="" (keydown.enter)="onSubmit()">
+    <form [formGroup]="model.form">
         <h3 class="tui-form__header tui-form__header_margin-top_none">Вход в систему</h3>
         <div class="tui-form__row">
             <tui-input class="tui-form__multi-field"
@@ -14,7 +14,10 @@
             </tui-input-password>
         </div>
         <div class="tui-form__buttons tui-form__buttons_align_end">
-            <button class="tui-form__button" tuiButton (click)="onSubmit()">
+            <button class="tui-form__button" tuiButton type="button" appearance="secondary" (click)="navigateToRegistration()">
+                Зарегистрироваться
+            </button>
+            <button class="tui-form__button" tuiButton type="submit" (click)="onSubmit()">
                 Войти
             </button>
         </div>

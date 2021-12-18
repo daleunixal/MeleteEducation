@@ -8,8 +8,9 @@
 
         </ng-content>
 
-        <div class="header-end">
-            <button tuiButton appearance="outline" (click)="redirectLogin()">Войти</button>
+        <div class="header-end" *tuiLet="profile | async as prof">
+            <button *ngIf="!prof" tuiButton appearance="outline" (click)="redirectLogin()">Войти</button>
+            <tui-avatar *ngIf="prof" [text]="prof.fullname" size="m" [rounded]="true"></tui-avatar>
         </div>
     </div>
 </header>

@@ -33,16 +33,20 @@ export class RegisterWebComponent implements OnInit {
         this.model = new RegisterViewModel(this._fb);
     }
 
+    public navigateToLogin(): void{
+        this._router.navigate(['cabinet','login'])
+    }
+
     public onSubmit(): void {
         console.log(this.model.toModel())
         this._profileManagerService.register(this.model.toModel())
             .pipe(
-                takeUntil(this._destroy$)
+
             )
             .subscribe({
                 next: (value) => {
                     if (value) {
-                        this._router.navigate(['login'], {
+                        this._router.navigate(['cabinet','login'], {
                             queryParams: {
                                 login: this.model.toModel().username
                             }

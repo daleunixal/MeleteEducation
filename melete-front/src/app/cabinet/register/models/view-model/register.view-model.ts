@@ -18,13 +18,15 @@ export class RegisterViewModel{
         return {
             username: this.form.get('login')?.value!,
             password: this.form.get('password')?.value!,
-            email: this.form.get('email')?.value!
+            email: this.form.get('email')?.value!,
+            fullname: this.form.get('fullname')?.value!
         } as IProfileRegisterRequest
     }
 
     private initializeForm(): void{
         this.form = this._fb.group({
             login: ['', [Validators.required]],
+            fullname: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(3)]],
             email: ['', [Validators.email, Validators.required]]
         })

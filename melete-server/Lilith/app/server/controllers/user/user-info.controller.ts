@@ -6,12 +6,12 @@ import { HydratedDocument } from 'mongoose';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
 
 export function userInfoController(request: ensuredRequest, response: Response) {
-    from(UserModel.getModel().findById(request.body.id).exec()).pipe(
+    from(UserModel.getModel().findById(request.user.id).exec()).pipe(
         tap((value: HydratedDocument<DocumentType<UserModel>>) => {
             response.status(200).send({
                 isValid: true,
-                User: value
+                fullname: value.fullname
             })
         })
-    )
+    ).subscribe()
 }

@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProfileManagerService } from '../../../services/profile-manager.service';
+import { Observable } from 'rxjs';
+import { ProfileModel } from '../../../models/profile/profile.model';
 
 @Component({
     selector: "header-layer",
@@ -7,11 +10,18 @@ import { Router } from '@angular/router';
     styleUrls: ['styles/styles.less'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderLayerComponent{
+export class HeaderLayerComponent implements OnInit{
+
+    public profile!: Observable<ProfileModel | null>
 
     constructor(
-        private _router: Router
+        private _router: Router,
+        private _profile: ProfileManagerService,
     ) {
+    }
+
+    public ngOnInit(): void {
+        this.profile = this._profile.profile
     }
 
     public redirectLogin(): void{

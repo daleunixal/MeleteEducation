@@ -30,7 +30,8 @@ export function ensureAuthenticatedMiddleware(request: Request, response: Respon
         return;
     }
 
-    if(dayjs(payload.expire).isBefore(dayjs())){
+
+    if(dayjs.unix(payload.expire).isBefore(dayjs())){
         response.status(401).send({
             error: "JWT Token Expired",
             isValid: false
@@ -54,7 +55,7 @@ export function ensureAuthenticatedMiddleware(request: Request, response: Respon
                 (request as ensuredRequest).user = payload.payload
                 next()
             })
-        )
+        ).subscribe()
 }
 
 export type ensuredRequest = Request & { user: { admin: boolean, id: mongoose.Types.ObjectId } }

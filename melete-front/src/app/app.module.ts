@@ -17,9 +17,10 @@ import { PageLayerComponent } from './page-layout/page.component';
 import { AsideLayerComponent } from './page-layout/children/aside/aside.component';
 import { HeaderLayerComponent } from './page-layout/children/header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TuiActionModule } from '@taiga-ui/kit';
+import { TuiActionModule, TuiAvatarModule } from '@taiga-ui/kit';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProfileManagerService } from './services/profile-manager.service';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 
 @NgModule({
@@ -40,11 +41,14 @@ import { ProfileManagerService } from './services/profile-manager.service';
         TuiButtonModule,
         TuiScrollbarModule,
         TuiActionModule,
-        HttpClientModule
+        HttpClientModule,
+        TuiLetModule,
+        TuiAvatarModule
     ],
     providers: [
         {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
         HttpClient,
+        ProfileManagerService,
         // {provide: MELETE_ENDPOINTS, useClass: }
 
     ],
