@@ -2,11 +2,34 @@
     <!--  Раздел Курсы  --->
     <div class="course-boarder">
         <div class="myCourse">
-            <div class="course-label">
-                <span class="tui-text_h3 ">Мои курсы</span>
+            <tui-island>
+                <span class="tui-text_h3 tui-island__title">Все курсы</span>
 
-            </div>
+                <div class="tui-island__carousel-pages tui-space_top-4">
+                    <tui-carousel [itemsCount]="3" [(index)]="index" [draggable]="true">
+                        <ng-container *ngFor="let item of courses; let i = index">
+                            <app-course-plate *tuiItem [class.item_active]="i === index + 1" [id]="item"></app-course-plate>
+                        </ng-container>
+                    </tui-carousel>
+                </div>
+                <tui-pagination class="tui-island__carousel-pages tui-space_top-3" size="s" [length]="2" [(index)]="index">
+                </tui-pagination>
+                <button class="tui-island__footer-button" tuiButton>Просмотреть все курсы</button>
+            </tui-island>
+            <tui-island class="tui-space_top-5">
+                <span class="tui-text_h3 tui-island__title">Мои курсы</span>
+
+                <div class="tui-island__carousel-pages tui-space_top-4">
+                    <tui-carousel [itemsCount]="3" [(index)]="index" [draggable]="true">
+                        <ng-container *ngFor="let item of courses; let i = index">
+                            <app-course-plate *tuiItem [class.item_active]="i === index + 1" [id]="item"></app-course-plate>
+                        </ng-container>
+                    </tui-carousel>
+                </div>
+                <tui-pagination class="tui-island__carousel-pages tui-space_top-3" size="s" [length]="2" [(index)]="index">
+
+                </tui-pagination>
+            </tui-island>
         </div>
     </div>
-
 </div>

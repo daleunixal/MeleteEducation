@@ -1,0 +1,11 @@
+<tui-island>
+    <h2 class="tui-text">{{course.title}}</h2>
+        <span>Завершен на {{sucessProcent}}%</span>
+    <tui-progress-circle
+        size="s"
+        [max]="100"
+        [value]="sucessProcent"
+    ></tui-progress-circle>
+    <br>
+    <p class="tui-text">{{course.description}}</p>
+</tui-island>

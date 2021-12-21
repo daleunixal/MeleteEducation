@@ -17,10 +17,17 @@ import { PageLayerComponent } from './page-layout/page.component';
 import { AsideLayerComponent } from './page-layout/children/aside/aside.component';
 import { HeaderLayerComponent } from './page-layout/children/header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TuiActionModule, TuiAvatarModule } from '@taiga-ui/kit';
+import {
+    TuiActionModule,
+    TuiAvatarModule,
+    TuiCarouselModule,
+    TuiIslandModule,
+    TuiPaginationModule, TuiProgressModule
+} from '@taiga-ui/kit';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProfileManagerService } from './services/profile-manager.service';
 import { TuiLetModule } from '@taiga-ui/cdk';
+import { CoursePlateComponent } from './dashboard/components/course-plate/course-plate.component';
 
 
 @NgModule({
@@ -30,6 +37,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
         AsideLayerComponent,
         HeaderLayerComponent,
         DashboardComponent,
+        CoursePlateComponent,
     ],
     imports: [
         BrowserModule,
@@ -43,7 +51,11 @@ import { TuiLetModule } from '@taiga-ui/cdk';
         TuiActionModule,
         HttpClientModule,
         TuiLetModule,
-        TuiAvatarModule
+        TuiAvatarModule,
+        TuiCarouselModule,
+        TuiIslandModule,
+        TuiPaginationModule,
+        TuiProgressModule
     ],
     providers: [
         {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},

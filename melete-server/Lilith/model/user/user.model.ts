@@ -1,6 +1,6 @@
 import { MongoInteractive } from '../mongo-interactive/mongo-interactive.base';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
-import { getModelForClass, mongoose, prop, ReturnModelType } from '@typegoose/typegoose';
+import { getModelForClass, mongoose, prop, Ref, ReturnModelType } from '@typegoose/typegoose';
 import { from, map, Observable } from 'rxjs';
 import { IUser } from './user.interface';
 import * as jwt from 'jsonwebtoken'
@@ -10,6 +10,7 @@ import { UserPayload } from './user.payload';
 import * as bcrypt from 'bcrypt';
 import { HydratedDocument } from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { CourseModel } from '../Course/course.model';
 
 export class UserModel extends MongoInteractive<UserModel> implements IUser {
     @prop()
@@ -24,6 +25,10 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
     public readonly _id: ObjectId
     @prop()
     public fullname: string;
+    @prop({
+        ref: () => CourseModel
+    })
+    public joinedCourses: Ref<CourseModel>[];
 
     constructor(data: IUser) {
         super();
@@ -52,6 +57,7 @@ export class UserModel extends MongoInteractive<UserModel> implements IUser {
                     model.password = this.password;
                     model.email = this.email;
                     model.fullname = this.fullname;
+                    model.joinedCourses = this.joinedCourses;
                     model.save();
 
                     return true;
