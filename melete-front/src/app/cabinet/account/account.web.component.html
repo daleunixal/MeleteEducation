@@ -1,0 +1,16 @@
+<div *tuiLet="profileData$ | async as profile" class="container">
+    <div *ngIf="profile">
+        <tui-island size="m" class="account tui-space_top-5">
+            <div class="tui-island__title">
+                <h1 class="tui-text">Данные профиля</h1>
+                <div class="tui-island__content">
+                    <div>
+                        <h3 class="tui-text">ФИО</h3>
+                        <h4 class="tui-text">{{profile.fullname}}</h4>
+                    </div>
+                </div>
+                <button class="tui-island__footer-button" tuiButton appearance="primary" (click)="logout()">Выйти</button>
+            </div>
+        </tui-island>
+    </div>
+</div>

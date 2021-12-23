@@ -79,6 +79,7 @@ export class ProfileManagerService {
                         localStorage.setItem('melete_token', response.token);
                         ProfileManagerService._userToken = response.token;
                         this._noti.sendPassStatus('Вы успешно вошли в систему')
+                        this._router.navigate([''])
                     }
                 }),
                 switchMap(() => {

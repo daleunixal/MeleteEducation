@@ -27,4 +27,8 @@ export class HeaderLayerComponent implements OnInit{
     public redirectLogin(): void{
         this._router.navigateByUrl('/cabinet/login')
     }
+
+    public toAccount(): void{
+        this._router.navigate(['cabinet', 'account'])
+    }
 }

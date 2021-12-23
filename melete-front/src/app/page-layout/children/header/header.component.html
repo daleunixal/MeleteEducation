@@ -1,6 +1,6 @@
 <header class="tui-container_fullwidth">
     <div class="header-row">
-        <span class="tui-text_h4 tui-space_left-5">
+        <span class="tui-text_h4 tui-space_left-5" [routerLink]="''">
             MeletEdu
         </span>
 
@@ -10,7 +10,7 @@
 
         <div class="header-end" *tuiLet="profile | async as prof">
             <button *ngIf="!prof" tuiButton appearance="outline" (click)="redirectLogin()">Войти</button>
-            <tui-avatar *ngIf="prof" [text]="prof.fullname" size="m" [rounded]="true"></tui-avatar>
+            <tui-avatar *ngIf="prof" [text]="prof.fullname" size="m" [rounded]="true" (click)="toAccount()"></tui-avatar>
         </div>
     </div>
 </header>

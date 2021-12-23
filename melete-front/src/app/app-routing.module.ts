@@ -6,11 +6,16 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
     {
         path: '',
-        component: DashboardComponent,
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
     },
     {
         path: 'cabinet',
         loadChildren: () => import('./cabinet/cabinet.module').then(m => m.CabinetWebModule),
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
     }
 ];
 

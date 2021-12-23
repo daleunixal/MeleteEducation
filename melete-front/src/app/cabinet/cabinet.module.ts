@@ -9,10 +9,13 @@ import { HttpClient } from '@angular/common/http';
 import { ProfileManagerService } from '../services/profile-manager.service';
 import { LoginWebComponent } from './login/login.web.component';
 import { MeduNotificationService } from '../services/notification.service';
+import { AccountWebComponent } from './account/account.web.component';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 const components: Array<Type<any>> = [
     RegisterWebComponent,
     LoginWebComponent,
+    AccountWebComponent,
 ]
 
 @NgModule({
@@ -24,6 +27,7 @@ const components: Array<Type<any>> = [
         TuiInputPasswordModule,
         TuiIslandModule,
         TuiButtonModule,
+        TuiLetModule,
     ],
     exports: [],
     declarations: components,
