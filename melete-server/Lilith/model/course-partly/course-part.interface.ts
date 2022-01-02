@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
-import { Ref } from '@typegoose/typegoose';
-import { UserModel } from '../user/user.model';
+import { ICourse } from '../Course/course.interface';
+import { Material } from '../material/material.model';
+import { prop } from '@typegoose/typegoose';
+import { CourseModel } from '../Course/course.model';
 
 export interface ICoursePart{
-    id?: mongoose.Types.ObjectId
+    id?: mongoose.Types.ObjectId,
+    parent: CourseModel,
     description: string,
-    videoLink: string,
+    materialList: Material
     total: number
-    userOwner: Ref<UserModel>
 }

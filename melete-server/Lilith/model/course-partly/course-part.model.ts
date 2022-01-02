@@ -1,10 +1,11 @@
 import mongoose, { HydratedDocument } from 'mongoose';
-import { getModelForClass, prop, Ref, ReturnModelType } from '@typegoose/typegoose';
+import { getModelForClass, prop, ReturnModelType } from '@typegoose/typegoose';
 import { MongoInteractive } from '../mongo-interactive/mongo-interactive.base';
 import { ICoursePart } from './course-part.interface';
 import { from, map, Observable } from 'rxjs';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
-import { UserModel } from '../user/user.model';
+import { Material } from '../material/material.model';
+import { CourseModel } from '../Course/course.model';
 
 export class CoursePartModel extends MongoInteractive<CoursePartModel> implements ICoursePart{
     @prop()
@@ -14,24 +15,26 @@ export class CoursePartModel extends MongoInteractive<CoursePartModel> implement
     public description: string
 
     @prop()
-    public videoLink: string
-
-    @prop()
     public total: number
 
     @prop({
-        ref: () => UserModel
+        ref: () => Material
     })
-    public userOwner: Ref<UserModel>
+    public materialList: Material;
 
+    @prop({
+        ref: () => CourseModel
+    })
+    public parent: CourseModel;
 
 
     constructor(data: ICoursePart) {
         super();
         this.description = data.description
-        this.videoLink = data.videoLink
         this.total = data.total
-
+        this.materialList = data.materialList
+        this.parent = data.parent
+        this._id = data.id?? MongoInteractive.generateObjectID();
     }
 
     public static getModel(): ReturnModelType<typeof CoursePartModel> {
@@ -43,23 +46,25 @@ export class CoursePartModel extends MongoInteractive<CoursePartModel> implement
             .pipe(
                 map((response: HydratedDocument<DocumentType<CoursePartModel>>): boolean => {
                     if(response){
-                        response.videoLink = this.videoLink
                         response.description = this.description
                         response.total = this.total
+                        response.parent = this.parent
+                        response.materialList = this.materialList
                         response.save();
 
                         return true
                     }
                     CoursePartModel.getModel().create({
-                        _id: CoursePartModel.generateObjectID(),
-                        videoLink: this.videoLink,
+                        _id: this.id,
                         description: this.description,
                         total: this.total,
-                        userOwner: this.userOwner,
+                        parent: this.parent,
+                        materialList: this.materialList
                     })
 
                     return true
                 })
             )
     }
+
 }

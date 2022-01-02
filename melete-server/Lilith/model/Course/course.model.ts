@@ -4,7 +4,7 @@ import { MongoInteractive } from '../mongo-interactive/mongo-interactive.base';
 import { ICourse } from './course.interface';
 import { from, map, Observable } from 'rxjs';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
-import { UserModel } from '../user/user.model';
+import { CoursePartModel } from '../course-partly/course-part.model';
 
 export class CourseModel extends MongoInteractive<CourseModel> implements ICourse{
     @prop()
@@ -13,10 +13,18 @@ export class CourseModel extends MongoInteractive<CourseModel> implements ICours
     public title: string
     @prop()
     public description: string
-    @prop()
-    public parts: string[]
-    @prop()
-    public rawParts: mongoose.Types.ObjectId[]
+    @prop({
+        ref: () => CoursePartModel
+    })
+    public rawParts: CoursePartModel[]
+
+    constructor(data: ICourse) {
+        super();
+        this._id = data.id?? MongoInteractive.generateObjectID();
+        this.title = data.title
+        this.description = data.description
+        this.rawParts = data.rawParts
+    }
 
     public static getModel(): ReturnModelType<typeof CourseModel> {
         return getModelForClass(CourseModel)
@@ -29,17 +37,15 @@ export class CourseModel extends MongoInteractive<CourseModel> implements ICours
                     if(response){
                         response.title = this.title
                         response.description = this.description
-                        response.parts = this.parts
                         response.rawParts = this.rawParts
                         response.save();
 
                         return true
                     }
                     CourseModel.getModel().create({
-                        _id: CourseModel.generateObjectID(),
+                        _id: this.id,
                         title: this.title,
                         description: this.description,
-                        parts: this.parts,
                         rawParts: this.rawParts,
                     })
 
