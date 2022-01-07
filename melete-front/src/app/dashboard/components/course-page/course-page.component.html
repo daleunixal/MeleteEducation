@@ -1,0 +1,20 @@
+<input type="checkbox" id="side-checkbox" />
+<div class="side-panel">
+    <label class="side-button-2" for="side-checkbox">+</label>
+    <div class="side-title">TypeScript</div>
+    <div *ngFor="let title of courseTitle">
+        <button class="tab" (click)="setTheme(title)">{{title}}</button>
+    </div>
+</div>
+<div class="side-button-1-wr">
+    <label class="side-button-1" for="side-checkbox">
+        <div class="side-b side-open">Темы</div>
+    </label>
+</div>
+<div class="video">
+    <h1>{{courseTitle[lessonNumber]}}</h1>
+    <iframe width='540' height='380'
+            [src]="themeVideo[lessonNumber] | safeUrl"
+            allowfullscreen>
+    </iframe>
+</div>

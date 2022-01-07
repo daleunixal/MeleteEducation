@@ -28,7 +28,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProfileManagerService } from './services/profile-manager.service';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { CoursePlateComponent } from './dashboard/components/course-plate/course-plate.component';
-
+import { CoursePageComponent } from './dashboard/components/course-page/course-page.component';
+import { safeUrl } from './dashboard/components/course-page/pipe/safeUrl';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,8 @@ import { CoursePlateComponent } from './dashboard/components/course-plate/course
         HeaderLayerComponent,
         DashboardComponent,
         CoursePlateComponent,
+        CoursePageComponent,
+        safeUrl
     ],
     imports: [
         BrowserModule,

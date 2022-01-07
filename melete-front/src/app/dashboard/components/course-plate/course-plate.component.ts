@@ -32,8 +32,11 @@ export class CoursePlateComponent implements OnInit {
             .subscribe();
     }
 
-    public click(): void {
-        this._router.navigate([])
+    public goToCourse(): void {
+        if(this.course.id !== '3'){
+            return
+        }
+        this._router.navigateByUrl(`dashboard/${this.course.title}`)
     }
 
 }
