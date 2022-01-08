@@ -3,7 +3,9 @@
     <label class="side-button-2" for="side-checkbox">+</label>
     <div class="side-title">TypeScript</div>
     <div *ngFor="let title of courseTitle">
-        <button class="tab" (click)="setTheme(title)">{{title}}</button>
+        <button class="tab" (click)="setTheme(title)">
+            <label style="cursor: pointer" for="side-checkbox">{{title}}</label>
+        </button>
     </div>
 </div>
 <div class="side-button-1-wr">
@@ -11,10 +13,16 @@
         <div class="side-b side-open">Темы</div>
     </label>
 </div>
-<div class="video">
+<div class="course" *ngIf="themeVideo[lessonNumber]">
     <h1>{{courseTitle[lessonNumber]}}</h1>
-    <iframe width='540' height='380'
+    <iframe *ngIf="themeVideo[lessonNumber]" width='560' height='315'
             [src]="themeVideo[lessonNumber] | safeUrl"
-            allowfullscreen>
+            allow fullscreen>
     </iframe>
 </div>
+<div class="task" *ngIf="themeDescription[lessonNumber]">
+    <h1>{{courseTitle[lessonNumber]}}</h1>
+    <p class="description">{{themeDescription[lessonNumber]}}</p>
+    <!--<p>ТУТА КОД Я НЕ ЕБУ ВООБЩЕ ЧТО КАК</p> -->
+</div>
+

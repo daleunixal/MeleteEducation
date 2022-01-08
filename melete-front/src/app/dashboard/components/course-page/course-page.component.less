@@ -26,6 +26,7 @@
     text-align: center; /* Контейнер для кнопки, чтобы было удобнее ее разместить */
     width: 200px;
 }
+
 .side-button-1 .side-b {
     margin: 10px;
     text-decoration: none;
@@ -75,12 +76,11 @@
 .side-button-1 .side-close {
     display: none;
 }
-#side-checkbox:checked + .side-panel + .side-button-1-wr .side-button-1 .side-open {
-    display: none;
-}
+
 #side-checkbox:checked + .side-panel + .side-button-1-wr .side-button-1 .side-close {
     display: block;
 }
+
 #side-checkbox:checked + .side-panel {
     left: 0;
 }
@@ -95,7 +95,7 @@
     cursor: pointer;
     transform: rotate(45deg);
     color: #BFE2FF;
-    transition: all 280ms ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 .side-button-2:hover {
     transform: rotate(45deg) scale(1.1);
@@ -110,4 +110,19 @@
     border: 0;
     margin-bottom: 10px;
     cursor:pointer;
+}
+
+.course{
+    text-align: center;
+    width: 100%;
+    margin-left: 75%;
+}
+
+.task{
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    white-space: normal;
 }

@@ -14,6 +14,8 @@ export class CoursePageComponent{
 
     public courseTitle: string[] = [];
     public themeVideo: string[] = [];
+    public themeDescription: string[] = [];
+    public themeTask: string[] = [];
     public lessonNumber: number = 0;
 
     private _courseData: ICourseData[] = courseData;
@@ -23,6 +25,8 @@ export class CoursePageComponent{
             (data: ICourseData) => {
                 this.courseTitle.push(data.theme);
                 this.themeVideo.push(data.video ? data.video : '');
+                this.themeDescription.push(data.description ? data.description : '');
+                this.themeTask.push(data.task ? data.task : '');
             }
         );
         this.themeVideo.forEach(
