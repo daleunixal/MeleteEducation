@@ -6,10 +6,11 @@ import { from, map, Observable } from 'rxjs';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
 import { Material } from '../material/material.model';
 import { CourseModel } from '../Course/course.model';
+import { ObjectId } from 'mongodb';
 
 export class CoursePartModel extends MongoInteractive<CoursePartModel> implements ICoursePart{
     @prop()
-    public readonly id?: mongoose.Types.ObjectId
+    public readonly id?: ObjectId
 
     @prop()
     public description: string
@@ -34,7 +35,7 @@ export class CoursePartModel extends MongoInteractive<CoursePartModel> implement
         this.total = data.total
         this.materialList = data.materialList
         this.parent = data.parent
-        this._id = data.id?? MongoInteractive.generateObjectID();
+        this.id = data.id?? MongoInteractive.generateObjectID();
     }
 
     public static getModel(): ReturnModelType<typeof CoursePartModel> {

@@ -5,10 +5,11 @@ import { ICourse } from './course.interface';
 import { from, map, Observable } from 'rxjs';
 import { DocumentType } from '@typegoose/typegoose/lib/types';
 import { CoursePartModel } from '../course-partly/course-part.model';
+import { ObjectId } from 'mongodb';
 
 export class CourseModel extends MongoInteractive<CourseModel> implements ICourse{
     @prop()
-    public readonly id?: mongoose.Types.ObjectId
+    public readonly id?: ObjectId
     @prop()
     public title: string
     @prop()
@@ -20,7 +21,7 @@ export class CourseModel extends MongoInteractive<CourseModel> implements ICours
 
     constructor(data: ICourse) {
         super();
-        this._id = data.id?? MongoInteractive.generateObjectID();
+        this.id = data.id?? MongoInteractive.generateObjectID();
         this.title = data.title
         this.description = data.description
         this.rawParts = data.rawParts

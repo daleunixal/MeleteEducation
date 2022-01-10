@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Component } from '@angular/core';
 import { ICourseData } from './interfase/course-data.interfase';
-import { safeUrl } from './pipe/safeUrl'
 import courseData from './mock';
 
 @Component({

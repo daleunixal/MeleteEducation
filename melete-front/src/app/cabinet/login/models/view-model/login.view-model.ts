@@ -1,6 +1,4 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IProfileRegisterRequest } from '../../../../models/interfaces/profile-register-request.interface';
-import { IProfileLoginResponse } from '../../../../models/interfaces/profile-login-response.interface';
 import { IProfileLoginRequest } from '../../../../models/interfaces/profile-login-request.interface';
 
 export class LoginViewModel {

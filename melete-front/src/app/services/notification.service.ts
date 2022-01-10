@@ -21,11 +21,11 @@ export class MeduNotificationService {
 
     public sendNotImplemented(): void {
         this._notifyService
-            .show('Dale обьебался и забыл реализовать фичу!',
+            .show('К сожалению, данный курс недоступен для просмотра',
                 {
-                    label: 'Господи, боже мой (+_+)',
+                    label: 'Нереализованная часть',
                     status: TuiNotification.Error,
-                    autoClose: false
+                    autoClose: true
                 }).subscribe();
     }
 

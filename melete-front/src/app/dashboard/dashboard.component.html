@@ -13,7 +13,7 @@
                 </div>
                 <tui-pagination class="tui-island__carousel-pages tui-space_top-3" size="s" [length]="2" [(index)]="index">
                 </tui-pagination>
-                <button class="tui-island__footer-button" tuiButton>Просмотреть все курсы</button>
+                <button class="tui-island__footer-button" tuiButton (click)="goToAllCourses()">Просмотреть все курсы</button>
             </tui-island>
             <tui-island class="tui-space_top-5">
                 <span class="tui-text_h3 tui-island__title">Мои курсы</span>

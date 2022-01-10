@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CourseManagerService } from '../../../services/course-manager.service';
 import { ICourse } from '../../../models/interfaces/course-plate.interface';
 import { tap } from 'rxjs/operators';
+import { MeduNotificationService } from '../../../services/notification.service';
 
 @Component({
     selector: 'app-course-plate',
@@ -21,6 +22,7 @@ export class CoursePlateComponent implements OnInit {
     constructor(
         private _router: Router,
         private _cpm: CourseManagerService,
+        private _info: MeduNotificationService,
     ) {
     }
 
@@ -34,7 +36,9 @@ export class CoursePlateComponent implements OnInit {
 
     public goToCourse(): void {
         if(this.course.id !== '3'){
-            return
+            this._info.sendNotImplemented();
+
+            return;
         }
         this._router.navigateByUrl(`dashboard/${this.course.title}`)
     }

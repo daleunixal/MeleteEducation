@@ -27,7 +27,7 @@ export class CourseManagerService{
         {
             id: '3',
             title: 'TypeScript',
-            description: 'Curabitur sit amet risus cursus, malesuada tellus sit amet, ornare turpis. In urna ipsum, pretium sed tincidunt at, varius quis metus. Sed accumsan risus turpis, vel vulputate dolor laoreet vel. Curabitur pellentesque lacus in pharetra gravida. Donec justo elit, sollicitudin ac egestas vel, finibus eget massa'
+            description: 'Курс по TypeScript, РТФ - 3 семестр / 2021 год. Ведущий: CTO Abanking'
         }
     ]
 

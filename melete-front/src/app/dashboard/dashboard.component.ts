@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MeduNotificationService } from '../services/notification.service';
 
 @Component({
     selector: "medu-dashboard",
@@ -11,8 +12,17 @@ export class DashboardComponent implements OnInit{
 
     public courses: string[] = ['1','2','3','4']
 
+    constructor(
+        private _noti: MeduNotificationService,
+    ) {
+    }
+
     public ngOnInit(): void {
         // throw new Error("Method not implemented.");
+    }
+
+    public goToAllCourses(): void{
+        this._noti.sendNotImplemented()
     }
 
 }
